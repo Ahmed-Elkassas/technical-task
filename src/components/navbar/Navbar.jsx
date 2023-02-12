@@ -1,14 +1,14 @@
-import { Button, Layout, Space, Typography, Avatar, Tooltip } from "antd";
+import { Button, Layout, Space, Typography, Avatar, Tooltip, Drawer } from "antd";
 import {
   ShoppingCartOutlined,
   UngroupOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 
-import ava1 from "../../assets/images/avatar1.png";
-import ava2 from "../../assets/images/avatar2.png";
-import ava3 from "../../assets/images/avatar3.png";
-import { Fragment } from "react";
+import ava1 from "/images/avatar1.png";
+import ava2 from "/images/avatar2.png";
+import ava3 from "/images/avatar3.png";
+import { Fragment, useState } from "react";
 
 const { Header } = Layout;
 const { Title, Text } = Typography;
@@ -23,6 +23,15 @@ const headerStyle = {
 };
 
 export const Navbar = () => {
+  const [open, setOpen] = useState(false);
+
+  const showDrawer = () => {
+    setOpen(true);
+  };
+
+  const onClose = () => {
+    setOpen(false);
+  };
   return (
     <Fragment>
       <Header style={headerStyle}>
@@ -64,6 +73,7 @@ export const Navbar = () => {
             shape="circle"
             icon={<ShoppingCartOutlined />}
             size="default"
+            onClick={showDrawer}
           />
           <Button
             style={{ background: "#E1ECF9" }}
@@ -73,6 +83,9 @@ export const Navbar = () => {
           />
         </Space>
       </Header>
+      <Drawer title="Your Cart" placement="right" onClose={onClose} open={open}>
+       Cart is Empty
+      </Drawer>
     </Fragment>
   );
 };
