@@ -1,9 +1,9 @@
 import { Card } from 'antd'
 
-const {Meta} = Card
-
 const cardStyle = {
-    padding: '1rem'
+    minHeight: '362px',
+    width: '271px',
+    borderRadius: '10px'
 }
 
 export const CardPillar = ({img, title, children}) => {

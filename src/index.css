@@ -7,3 +7,9 @@ body {
 img {
     max-width: 100%;
 }
+.ant-card-body {
+    padding: 4px !important;
+}
+.ant-card-cover {
+    padding: 15px !important;
+}

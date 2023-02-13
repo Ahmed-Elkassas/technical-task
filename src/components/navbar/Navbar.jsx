@@ -20,6 +20,7 @@ const headerStyle = {
   alignItems: "center",
   boxShadow: "0px 2px 5px -1px rgba(217,217,217,1)",
   lineHeight: "unset",
+  zIndex: '10'
 };
 
 export const Navbar = () => {
