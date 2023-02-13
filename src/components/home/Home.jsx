@@ -1,7 +1,9 @@
-import { Button, Layout, Space, Typography } from "antd";
+import { Layout, Typography } from "antd";
 import { cards } from "../../constants/data.js";
 import { CardPillar } from "../card/CardPillar";
 import diamond from "/diamond.svg";
+import { useGlobalContext } from "../../store/CartProvider.jsx";
+
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -16,8 +18,21 @@ import {
   ActionButtons,
 } from "./homeStyle.js";
 import { ExportOutlined, PlusOutlined } from "@ant-design/icons";
+import { useEffect } from "react";
 
 export const Home = () => {
+
+const {addItem, items} = useGlobalContext()
+
+  const cartItemAddHandler = (item) => {
+    addItem({...item, amount: 1})
+  }
+
+   useEffect(() => {
+    console.log(items)
+  }, [items])
+
+
   return (
     <Content
       style={{
@@ -32,7 +47,7 @@ export const Home = () => {
       <CardContainer>
         {cards.map((item) => (
           <CardPillar
-            key={item.background}
+            key={item.id}
             img={item.headImg}
             title={item.title}
           >
@@ -47,7 +62,7 @@ export const Home = () => {
                   <AddToCardBtn>
                     <ExportOutlined />
                   </AddToCardBtn>
-                  <AddToCardBtn>
+                  <AddToCardBtn onClick={cartItemAddHandler.bind(null, item)}>
                     <PlusOutlined />
                   </AddToCardBtn>
                 </div>
