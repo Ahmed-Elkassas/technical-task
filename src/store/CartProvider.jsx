@@ -53,9 +53,15 @@ const cartReducer = (state, action) => {
       });
       return tempstate2;
     case REMOVE:
+      const existingCartItemIdx = state.items.findIndex(
+        (item) => item.id === action.id
+      );
+      const existingItem = state.items[existingCartItemIdx];
+      const newTotalAmount = state.totalAmount - existingItem.price;
       const tempState = state.items.filter((item) => item.id !== action.id);
       return {
         items: tempState,
+        totalAmount: newTotalAmount
       };
     default:
       return initialState;
@@ -83,7 +89,7 @@ const incrementItemHandler = (item) => {
 
   const cartContext = {
     items: cartState.items,
-    totalQty: cartState.totalAmount,
+    totalAmount: cartState.totalAmount,
     addItem: addItemHandler,
     incrementItem: incrementItemHandler,
     decrementItem: decrementItemHandler,

@@ -60,7 +60,7 @@ const {addItem, items} = useGlobalContext()
                 <CardValue>{item.value}</CardValue>
                 <div style={{display: 'flex', justifyContent: 'space-between', gap: '5px'}}>
                   <AddToCardBtn>
-                    <ExportOutlined />
+                    <ExportOutlined spin />
                   </AddToCardBtn>
                   <AddToCardBtn onClick={cartItemAddHandler.bind(null, item)}>
                     <PlusOutlined />

@@ -1,11 +1,12 @@
-import { Button, Col, Row } from "antd";
+import { Alert, Button, Col, Divider, Row, Space } from "antd";
 import { useGlobalContext } from "../../store/CartProvider";
 import { ImgContainer } from "../navbar/navbarStyle";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { DeleteFilled } from "@ant-design/icons";
 
 export const ShopCart = () => {
-  const { items, removeItem } = useGlobalContext();
+  const [showAlert, setShowAlert] = useState(false);
+  const { items, removeItem, totalAmount } = useGlobalContext();
 
   const cartItemRemoveHandler = (id) => {
     removeItem(id);
@@ -61,6 +62,66 @@ export const ShopCart = () => {
           </Col>
         </Row>
       ))}
+      <Divider style={{ margin: "8px 0px" }} />
+      <Space
+        direction="horizontal"
+        style={{ justifyContent: "space-between", width: "100%", height: '25px' }}
+      >
+        <p>Subtotal</p>
+        <p style={{ color: "#0097C2" }}>{totalAmount} DTSUs</p>
+      </Space>
+      <Space
+        direction="horizontal"
+        style={{ justifyContent: "space-between", width: "100%",height: '25px' }}
+      >
+        <p>New Payment</p>
+        <p style={{ color: "#0097C2" }}>No, Inclusive in your package</p>
+      </Space>
+      <Divider style={{ margin: "10px 0px" }} />
+      <Space
+        direction="horizontal"
+        style={{
+          justifyContent: "space-between",
+          width: "100%",
+          marginBottom: "1rem",
+        }}
+      >
+        <p>Total Units Consumed</p>
+        <p style={{ color: "#0097C2" }}>{totalAmount} DTSUs</p>
+      </Space>
+      <Button
+        type="primary"
+        shape="round"
+        block
+        style={{ marginBottom: ".7rem" }}
+        onClick={() => setShowAlert(true)}
+      >
+        Checkout
+      </Button>
+      <Button
+        type="default"
+        shape="round"
+        block
+        style={{ marginBottom: "1rem" }}
+      >
+        Back to Run Information
+      </Button>
+      {showAlert && (
+        <Fragment>
+          <Alert
+            message="Your have made a great chooseLet's Run and be ready for a surprise"
+            type="warning"
+            closable
+          />
+          <Alert
+            message="Some requests can take a week or moreto be delivered and may be subject to dependency resolutions related to your"
+            type="info"
+            showIcon
+            closable
+            style={{marginTop: '10px'}}
+          />
+        </Fragment>
+      )}
     </Fragment>
   );
 };
