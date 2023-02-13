@@ -3,3 +3,13 @@ body {
     padding: 0;
     box-sizing: border-box;
 }
+
+img {
+    max-width: 100%;
+}
+.ant-card-body {
+    padding: 4px !important;
+}
+.ant-card-cover {
+    padding: 15px !important;
+}
