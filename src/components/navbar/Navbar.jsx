@@ -7,7 +7,6 @@ import {
   Tooltip,
   Drawer,
   Badge,
-  Divider,
   Row,
   Col,
 } from "antd";
@@ -26,6 +25,7 @@ import emptyCartIcon from '/empty-cart.svg'
 import { Fragment, useState } from "react";
 import { useGlobalContext } from "../../store/CartProvider";
 import { EmptyCart, ImgContainer } from "./navbarStyle";
+import { ShopCart } from "../shopcart/ShopCart";
 
 const { Header } = Layout;
 const { Title, Text } = Typography;
@@ -33,6 +33,7 @@ const { Title, Text } = Typography;
 const headerStyle = {
   backgroundColor: "#fff",
   display: "flex",
+  flexWrap: 'wrap',
   justifyContent: "space-between",
   alignItems: "center",
   boxShadow: "0px 2px 5px -1px rgba(217,217,217,1)",
@@ -51,16 +52,13 @@ export const Navbar = () => {
     setOpen(false);
   };
 
-  const { items, removeItem } = useGlobalContext();
+  const { items } = useGlobalContext();
 
   const numberOfCartItems = items.reduce((curNumber, item) => {
     return curNumber + item.amount;
   }, 0);
 
-  const cartItemRemoveHandler = (id) => {
-    removeItem(id);
-  };
-
+ 
   return (
     <Fragment>
       <Header style={headerStyle}>
@@ -129,55 +127,7 @@ export const Navbar = () => {
             <p style={{color: 'gray', marginTop: '0px'}}>start add your requests here</p>
           </EmptyCart>
         ) : (
-          <Fragment>
-            <Row justify="space-between">
-              <Col span={8}>Product</Col>
-              <Col span={2}>Qtn.</Col>
-              <Col span={2}>Remove</Col>
-            </Row>
-            {items.map((item) => (
-              <Row
-                key={item.id}
-                justify="space-between"
-                style={{ margin: "1rem auto" }}
-              >
-                <Col
-                  span={9}
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    gap: "5px",
-                  }}
-                >
-                  <ImgContainer>
-                    <img
-                      src={item.headImg}
-                      style={{ width: "100%", height: "100%" }}
-                    />
-                  </ImgContainer>
-                  <p style={{ fontSize: "13px" }}>{item.title}</p>
-                </Col>
-                <Col span={2}>
-                  <input
-                    type="number"
-                    step="1"
-                    min="1"
-                    max="5"
-                    defaultValue={item.amount}
-                  />
-                </Col>
-                <Col span={1}>
-                  <Button
-                    icon={<DeleteFilled />}
-                    shape="default"
-                    type="text"
-                    danger
-                    onClick={cartItemRemoveHandler.bind(null, item.id)}
-                  />
-                </Col>
-              </Row>
-            ))}
-          </Fragment>
+          <ShopCart />
         )}
       </Drawer>
     </Fragment>

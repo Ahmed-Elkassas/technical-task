@@ -5,6 +5,9 @@ export const CardContainer = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(251px, 1fr));
   gap: 1.3rem;
   padding: 29.5px 0px 116px;
+  @media (max-width: 690px) {
+    justify-items: center;
+  }
 `;
 
 export const CardContent = styled.div`
