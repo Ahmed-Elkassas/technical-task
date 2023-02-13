@@ -7,9 +7,13 @@ body {
 img {
     max-width: 100%;
 }
+/* --- x --- Ant Design change --- x --- */
 .ant-card-body {
     padding: 4px !important;
 }
 .ant-card-cover {
     padding: 15px !important;
+}
+.ant-drawer-body {
+    position: relative !important;
 }

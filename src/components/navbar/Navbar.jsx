@@ -1,4 +1,16 @@
-import { Button, Layout, Space, Typography, Avatar, Tooltip, Drawer, Badge, Divider, Row, Col } from "antd";
+import {
+  Button,
+  Layout,
+  Space,
+  Typography,
+  Avatar,
+  Tooltip,
+  Drawer,
+  Badge,
+  Divider,
+  Row,
+  Col,
+} from "antd";
 import {
   DeleteFilled,
   ShoppingCartOutlined,
@@ -9,9 +21,11 @@ import {
 import ava1 from "/images/avatar1.png";
 import ava2 from "/images/avatar2.png";
 import ava3 from "/images/avatar3.png";
-import { Fragment, useEffect, useState } from "react";
+import emptyCartIcon from '/empty-cart.svg'
+
+import { Fragment, useState } from "react";
 import { useGlobalContext } from "../../store/CartProvider";
-import { ImgContainer } from "./navbarStyle";
+import { EmptyCart, ImgContainer } from "./navbarStyle";
 
 const { Header } = Layout;
 const { Title, Text } = Typography;
@@ -23,7 +37,7 @@ const headerStyle = {
   alignItems: "center",
   boxShadow: "0px 2px 5px -1px rgba(217,217,217,1)",
   lineHeight: "unset",
-  zIndex: '10'
+  zIndex: "10",
 };
 
 export const Navbar = () => {
@@ -37,7 +51,7 @@ export const Navbar = () => {
     setOpen(false);
   };
 
-  const {items, removeItem} = useGlobalContext()
+  const { items, removeItem } = useGlobalContext();
 
   const numberOfCartItems = items.reduce((curNumber, item) => {
     return curNumber + item.amount;
@@ -46,7 +60,6 @@ export const Navbar = () => {
   const cartItemRemoveHandler = (id) => {
     removeItem(id);
   };
-
 
   return (
     <Fragment>
@@ -84,7 +97,7 @@ export const Navbar = () => {
           </Avatar.Group>
         </div>
         <Space direction="horizontal" size="middle">
-          <Badge count={numberOfCartItems} showZero color='#faad14'>
+          <Badge count={numberOfCartItems} showZero color="#faad14">
             <Button
               style={{ background: "#E1ECF9" }}
               shape="circle"
@@ -92,44 +105,81 @@ export const Navbar = () => {
               size="default"
               onClick={showDrawer}
             />
-           </Badge>
-           <Badge count={2} showZero color='#faad14'>
+          </Badge>
+          <Badge count={2} showZero color="#faad14">
             <Button
               style={{ background: "#E1ECF9" }}
               shape="circle"
               icon={<UngroupOutlined />}
               size="default"
             />
-           </Badge>
+          </Badge>
         </Space>
       </Header>
-      <Drawer title="Your Run Cart" placement="right" onClose={onClose} open={open}>
-       {items.length === 0 ? 
-        <p>Your cart is empty</p> : 
-         <Fragment>
-          <Row justify="space-between">
-          <Col span={8}>Product</Col>
-          <Col span={2}>Qtn.</Col>
-          <Col span={2}>Remove</Col>
-        </Row>
-       {items.map((item) => (
-        <Row key={item.id} justify="space-between" style={{margin: '1rem auto'}}>
-          <Col span={9}  style={{display: "flex", justifyContent: "space-between", gap: '5px'}}>
-            <ImgContainer>
-              <img  src={item.headImg} style={{width: '100%', height: '100%'}} />
-            </ImgContainer>
-            <p style={{fontSize: '13px'}}>{item.title}</p>
-          </Col>
-          <Col span={2}>{item.amount}</Col>
-          <Col span={1}>
-            <Button icon={<DeleteFilled />} shape="default" type="text" danger onClick={cartItemRemoveHandler.bind(null, item.id)} />
-          </Col>
-        </Row>
-       ))}
-         </Fragment>
-      }
+      <Drawer
+        title="Your Run Cart"
+        placement="right"
+        onClose={onClose}
+        open={open}
+      >
+        {items.length === 0 ? (
+          <EmptyCart>
+            <img src={emptyCartIcon} alt="empty cart" />
+            <p style={{ marginBottom: '0px'}}>Your run cart is empty!</p>
+            <p style={{color: 'gray', marginTop: '0px'}}>start add your requests here</p>
+          </EmptyCart>
+        ) : (
+          <Fragment>
+            <Row justify="space-between">
+              <Col span={8}>Product</Col>
+              <Col span={2}>Qtn.</Col>
+              <Col span={2}>Remove</Col>
+            </Row>
+            {items.map((item) => (
+              <Row
+                key={item.id}
+                justify="space-between"
+                style={{ margin: "1rem auto" }}
+              >
+                <Col
+                  span={9}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    gap: "5px",
+                  }}
+                >
+                  <ImgContainer>
+                    <img
+                      src={item.headImg}
+                      style={{ width: "100%", height: "100%" }}
+                    />
+                  </ImgContainer>
+                  <p style={{ fontSize: "13px" }}>{item.title}</p>
+                </Col>
+                <Col span={2}>
+                  <input
+                    type="number"
+                    step="1"
+                    min="1"
+                    max="5"
+                    defaultValue={item.amount}
+                  />
+                </Col>
+                <Col span={1}>
+                  <Button
+                    icon={<DeleteFilled />}
+                    shape="default"
+                    type="text"
+                    danger
+                    onClick={cartItemRemoveHandler.bind(null, item.id)}
+                  />
+                </Col>
+              </Row>
+            ))}
+          </Fragment>
+        )}
       </Drawer>
     </Fragment>
   );
 };
- 

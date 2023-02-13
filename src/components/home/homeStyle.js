@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const CardContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(251px, 1fr));
   gap: 1.3rem;
   padding: 29.5px 0px 116px;
 `;
@@ -10,7 +10,7 @@ export const CardContainer = styled.div`
 export const CardContent = styled.div`
   background-color: ${(props) => props.background};
   width: 262px;
-  min-height: 173px;
+  height: 183px;
   margin: auto;
   padding: 10px;
   border-radius: 3px;
