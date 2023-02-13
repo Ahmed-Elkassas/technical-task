@@ -7,6 +7,8 @@ const cardStyle = {
 }
 
 export const CardPillar = ({img, title, children}) => {
+
+
   return (
     <Card
     style={cardStyle}
