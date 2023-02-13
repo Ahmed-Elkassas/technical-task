@@ -1,4 +1,4 @@
-import { Button, Layout, Space, Typography, Avatar, Tooltip, Drawer } from "antd";
+import { Button, Layout, Space, Typography, Avatar, Tooltip, Drawer, Badge } from "antd";
 import {
   ShoppingCartOutlined,
   UngroupOutlined,
@@ -69,19 +69,23 @@ export const Navbar = () => {
           </Avatar.Group>
         </div>
         <Space direction="horizontal" size="middle">
-          <Button
-            style={{ background: "#E1ECF9" }}
-            shape="circle"
-            icon={<ShoppingCartOutlined />}
-            size="default"
-            onClick={showDrawer}
-          />
-          <Button
-            style={{ background: "#E1ECF9" }}
-            shape="circle"
-            icon={<UngroupOutlined />}
-            size="default"
-          />
+          <Badge count={0} showZero color='#faad14'>
+            <Button
+              style={{ background: "#E1ECF9" }}
+              shape="circle"
+              icon={<ShoppingCartOutlined />}
+              size="default"
+              onClick={showDrawer}
+            />
+           </Badge>
+           <Badge count={2} showZero color='#faad14'>
+            <Button
+              style={{ background: "#E1ECF9" }}
+              shape="circle"
+              icon={<UngroupOutlined />}
+              size="default"
+            />
+           </Badge>
         </Space>
       </Header>
       <Drawer title="Your Cart" placement="right" onClose={onClose} open={open}>
