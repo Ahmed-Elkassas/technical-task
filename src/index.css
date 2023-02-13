@@ -7,9 +7,23 @@ body {
 img {
     max-width: 100%;
 }
+/* --- x --- Ant Design change --- x --- */
+.ant-layout-header {
+    min-height: 64px !important;
+    height: unset !important;
+}
+@media (max-width: 524px) {
+    .ant-layout-header {
+        justify-content: center !important;
+        gap: 20px;
+    }
+}
 .ant-card-body {
     padding: 4px !important;
 }
 .ant-card-cover {
     padding: 15px !important;
+}
+.ant-drawer-body {
+    position: relative !important;
 }
