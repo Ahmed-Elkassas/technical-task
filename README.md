@@ -1,6 +1,6 @@
 # technical-task
 
-# [🚀 technical-task project](https://ahmed-elkassas.github.io/technical-task/)
+## [🚀 technical-task project](https://ahmed-elkassas.github.io/technical-task/)
 
 ## Installation
 
