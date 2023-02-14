@@ -1,5 +1,7 @@
 # technical-task
 
+# [🚀 technical-task project](https://ahmed-elkassas.github.io/technical-task/)
+
 ## Installation
 
 Install my-project with npm
